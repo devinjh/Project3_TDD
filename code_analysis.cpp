@@ -30,7 +30,6 @@ std::string formatAnalysisXML(const analysis_request& request) {
     		return request.disk_filename;
     	}
     }
-
     // wrap the content with a unit element
     xmlWrapper wrap("code", "http://mlcollard.net/code");
     wrap.startElement("unit");
