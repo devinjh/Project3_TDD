@@ -21,6 +21,10 @@ std::string formatAnalysisXML(const analysis_request& request) {
     // Code for Rule #1
     if (request.disk_filename != "")
     {
+    	if (request.option_filename != "")
+    	{
+    		return request.option_filename;
+    	}
     	if (request.disk_filename.find(".zip") != -1 || request.disk_filename.find(".gz") != -1)
     	{
     		return request.entry_filename;

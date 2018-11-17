@@ -37,17 +37,19 @@ if (a &lt; b) a = b;
         request.entry_filename = "entry_filename.cpp";
         assert(formatAnalysisXML(request) == request.disk_filename);
 
+        // Test #2
         request.disk_filename = "disk_filename.zip";
         request.entry_filename = "entry_filename.cpp";
         assert(formatAnalysisXML(request) == request.entry_filename);
 
+        // Test #3
         request.disk_filename = "disk_filename.tar.gz";
         request.entry_filename = "entry_filename.cpp";
         assert(formatAnalysisXML(request) == request.entry_filename);
     }
 
     // Rule #2
-    /*{
+    {
         analysis_request request;
         request.source_code = R"(if (a < b) a = b;)";
         request.disk_filename  = "";
@@ -59,11 +61,24 @@ if (a &lt; b) a = b;
         request.default_language = "";
         request.option_loc = -1;
 
-        // Test #
+        // Test #1
+        request.option_filename = "option_filename.cpp";
         request.disk_filename = "disk_filename.cpp";
         request.entry_filename = "entry_filename.cpp";
-        assert(formatAnalysisXML(request) == request.disk_filename);
-    }*/
+        assert(formatAnalysisXML(request) == request.option_filename);
+
+        // Test #2
+        request.option_filename = "option_filename.cpp";
+        request.disk_filename = "disk_filename.zip";
+        request.entry_filename = "entry_filename.cpp";
+        assert(formatAnalysisXML(request) == request.option_filename);
+
+        // Test #3
+        request.option_filename = "option_filename.cpp";
+        request.disk_filename = "disk_filename.tar.gz";
+        request.entry_filename = "entry_filename.cpp";
+        assert(formatAnalysisXML(request) == request.option_filename);
+    }
 
     return 0;
 }
