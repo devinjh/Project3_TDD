@@ -24,13 +24,7 @@ int main() {
         request.default_language = "";
         request.option_loc = -1;
 
-        /*assert(formatAnalysisXML(request) ==
-            R"(<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<code:unit xmlns:code="http://mlcollard.net/code" language="C++">
-if (a &lt; b) a = b;
-</code:unit>
-)");
-            )");*/
+        assert(formatAnalysisXML(request) ==R"(<?xml version="1.0" encoding="UTF-8" standalone="yes"?><code:unit xmlns:code="http://mlcollard.net/code" language="C++">if (a &lt; b) a = b;</code:unit>)");
 
         // Test #1
         request.disk_filename = "disk_filename.cpp";
@@ -269,6 +263,52 @@ if (a &lt; b) a = b;
         request.disk_filename = "-";
         request.entry_filename = "entry_filename";
         assert(formatAnalysisXML(request) == request.entry_filename);
+    }
+
+    // Rule #8
+    /*{
+        analysis_request request;
+        request.source_code = R"(if (a < b) a = b;)";
+        request.disk_filename  = "";
+        request.entry_filename  = "";
+        request.option_filename = "";
+        request.source_url       = "";
+        request.option_url      = "";
+        request.option_language = "C++";
+        request.default_language = "";
+        request.option_loc = -1;
+
+        // Test #1
+        request.source_code = R"(if (a < b) a = b;)";
+        request.option_loc = 1;
+        assert(formatAnalysisXML(request) == request.option_loc);
+
+        // Test #2
+        request.source_code = R"()";
+        request.option_loc = 0;
+        assert(formatAnalysisXML(request) == request.option_loc);
+    }*/
+
+    // Rule #9
+    {
+        analysis_request request;
+        request.source_code = R"(if (a < b) a = b;)";
+        request.disk_filename  = "";
+        request.entry_filename  = "";
+        request.option_filename = "";
+        request.source_url       = "";
+        request.option_url      = "";
+        request.option_language = "C++";
+        request.default_language = "";
+        request.option_loc = -1;
+
+        // Test #1
+        request.option_hash = "gh78g78hg";
+        assert(formatAnalysisXML(request) == assert(formatAnalysisXML(request) ==R"(<?xml version="1.0" encoding="UTF-8" standalone="yes"?><code:unit xmlns:code="http://mlcollard.net/code" language="C++" hash="gh78g78hg">if (a &lt; b) a = b;</code:unit>)");
+
+        // Test #2
+        request.option_hash = "fdnjgkdfgnjfdkngfjdkngfdngkjfdngjkdfngjkdfngjkfdnkjfdngn57y57y57";
+        assert(formatAnalysisXML(request) == assert(formatAnalysisXML(request) ==R"(<?xml version="1.0" encoding="UTF-8" standalone="yes"?><code:unit xmlns:code="http://mlcollard.net/code" language="C++" hash="fdnjgkdfgnjfdkngfjdkngfdngkjfdngjkdfngjkdfngjkfdnkjfdngn57y57y57">if (a &lt; b) a = b;</code:unit>)");
     }
 
     return 0;

@@ -90,6 +90,21 @@ std::string formatAnalysisXML(const analysis_request& request) {
     xmlWrapper wrap("code", "http://mlcollard.net/code");
     wrap.startElement("unit");
     wrap.attribute("language", request.option_language);
+
+    // Code for Rule #8
+    /*if (request.option_loc > -1)
+    {
+    	//std::string str = request.option_loc;
+    	wrap.attribute("loc", request.option_loc);
+    }*/
+
+    // Code for Rule #9
+    if (request.option_hash != "")
+    {
+    	wrap.attribute("hash", request.option_hash);
+    }
+
+    // wrap the content with a unit element
     wrap.content(request.source_code);
     wrap.endElement();
 
