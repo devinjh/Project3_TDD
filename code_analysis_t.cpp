@@ -155,7 +155,7 @@ if (a &lt; b) a = b;
     }
 
     // Rule #4
-    /*{
+    {
         analysis_request request;
         request.source_code = R"(if (a < b) a = b;)";
         request.disk_filename  = "";
@@ -169,9 +169,14 @@ if (a &lt; b) a = b;
 
         // Test #1
         request.source_url = "source.url";
-        request.option_url = "option.url"
+        request.option_url = "option.url";
         assert(formatAnalysisXML(request) == request.option_url);
-    }*/
+
+        // Test #2
+        request.source_url = "source.url";
+        request.option_url = "";
+        assert(formatAnalysisXML(request) == request.source_url);
+    }
 
     return 0;
 }

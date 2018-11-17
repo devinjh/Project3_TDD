@@ -45,7 +45,14 @@ std::string formatAnalysisXML(const analysis_request& request) {
     }
 
     // Code for Rule #4
-    //if (request.option)
+    if (request.option_url != "" || request.source_url != "")
+    {
+    	if (request.option_url != "")
+    	{
+    		return request.option_url;
+    	}
+    	return request.source_url;
+    }
 
     // wrap the content with a unit element
     xmlWrapper wrap("code", "http://mlcollard.net/code");
