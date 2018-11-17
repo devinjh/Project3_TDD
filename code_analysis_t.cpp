@@ -56,6 +56,11 @@ if (a &lt; b) a = b;
         request.disk_filename = "disk_filename.zip";
         request.entry_filename = "";
         assert(formatAnalysisXML(request) == request.disk_filename);
+
+        // Test #5
+        request.disk_filename = "disk_filename.tar.gz";
+        request.entry_filename = "";
+        assert(formatAnalysisXML(request) == request.disk_filename);
     }
 
     // Rule #2
@@ -114,10 +119,39 @@ if (a &lt; b) a = b;
         assert(formatAnalysisXML(request) == request.disk_filename);
 
         // Test #3
+        request.disk_filename = "";
+        request.entry_filename = "data";
+        assert(formatAnalysisXML(request) == request.entry_filename);
+
+        // Test #4
         request.option_filename = "option_filename.cpp";
         request.disk_filename = "disk_filename.tar.gz";
         request.entry_filename = "data";
         assert(formatAnalysisXML(request) == request.option_filename);
+
+        // Test #5
+        request.option_filename = "";
+        request.disk_filename = "disk_filename.tar.gz";
+        request.entry_filename = "data";
+        assert(formatAnalysisXML(request) == request.disk_filename);
+
+        // Test #6
+        request.option_filename = "option_filename.cpp";
+        request.disk_filename = "disk_filename.zip";
+        request.entry_filename = "data";
+        assert(formatAnalysisXML(request) == request.option_filename);
+
+        // Test #7
+        request.option_filename = "option_filename.cpp";
+        request.disk_filename = "";
+        request.entry_filename = "data";
+        assert(formatAnalysisXML(request) == request.option_filename);
+
+        // Test #8
+        request.option_filename = "";
+        request.disk_filename = "";
+        request.entry_filename = "data";
+        assert(formatAnalysisXML(request) == request.entry_filename);
     }
 
     // Rule #4
