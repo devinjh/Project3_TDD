@@ -197,7 +197,7 @@ if (a &lt; b) a = b;
     }
 
     // Rule #6
-    /*{
+    {
         analysis_request request;
         request.source_code = R"(if (a < b) a = b;)";
         request.disk_filename  = "";
@@ -206,13 +206,44 @@ if (a &lt; b) a = b;
         request.source_url       = "";
         request.option_url      = "";
         request.option_language = "C++";
-        request.default_language = "C++";
+        request.default_language = "C";
         request.option_loc = -1;
 
         // Test #1
         request.option_filename  = "file.cpp";
+        request.default_language = "C++";
         assert(formatAnalysisXML(request) == request.default_language);
-    }*/
+
+        // Test #2
+        request.option_filename  = "file.java";
+        request.default_language = "Java";
+        assert(formatAnalysisXML(request) == request.default_language);
+
+        // Test #3
+        request.option_filename  = "file.cs";
+        request.default_language = "C#";
+        assert(formatAnalysisXML(request) == request.default_language);
+
+        // Test #4
+        request.option_filename  = "file.aj";
+        request.default_language = "AspectJ";
+        assert(formatAnalysisXML(request) == request.default_language);
+
+        // Test #5
+        request.option_filename  = "file.cxx";
+        request.default_language = "C++";
+        assert(formatAnalysisXML(request) == request.default_language);
+
+        // Test #6
+        request.option_filename  = "file.c";
+        request.default_language = "C";
+        assert(formatAnalysisXML(request) == request.default_language);
+
+        // Test #7
+        request.option_filename  = "file.hpp";
+        request.default_language = "C++";
+        assert(formatAnalysisXML(request) == request.default_language);
+    }
 
     // Rule #7
     {
