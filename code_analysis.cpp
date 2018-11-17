@@ -91,6 +91,7 @@ std::string formatAnalysisXML(const analysis_request& request) {
     wrap.startElement("unit");
     wrap.attribute("language", request.option_language);
 
+    /*
     // Code for Rule #8
     if (request.option_loc > -1)
     {
@@ -104,6 +105,7 @@ std::string formatAnalysisXML(const analysis_request& request) {
     {
     	wrap.attribute("hash", request.option_hash);
     }
+    */
 
     // wrap the content with a unit element
     wrap.content(request.source_code);
