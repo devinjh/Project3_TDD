@@ -18,6 +18,13 @@
  */
 std::string formatAnalysisXML(const analysis_request& request) {
 
+    // Code for Rule #6
+    // Checks to see what language is being used by the option filename
+    if (request.option_filename != "" && request.default_language != "")
+    {
+    	return get_language_from_filename(request.option_filename);
+    }
+
     // Code for Rule #5
     // Checks and makes sure that the default language is set, becasue this has the highest priority
     if (request.default_language != "")
@@ -38,7 +45,7 @@ std::string formatAnalysisXML(const analysis_request& request) {
     	return request.source_url;
     }
 
-    // Code for Rules #1, 2, and 3
+    // Code for Rules #1, 2, 3, and 7
     // If the filename of either the disk, entry, or option is provided, then the code enters here
     if (request.disk_filename != "" || request.entry_filename != "" || request.option_filename != "")
     {
@@ -47,7 +54,6 @@ std::string formatAnalysisXML(const analysis_request& request) {
     	{
     		return request.option_filename;
     	}
-
     	// If the file is an archive file, then the code enters into here
     	if (request.disk_filename.find(".zip") != -1 || request.disk_filename.find(".gz") != -1)
     	{

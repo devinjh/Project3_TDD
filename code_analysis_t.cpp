@@ -206,11 +206,11 @@ if (a &lt; b) a = b;
         request.source_url       = "";
         request.option_url      = "";
         request.option_language = "C++";
-        request.default_language = "";
+        request.default_language = "C++";
         request.option_loc = -1;
 
         // Test #1
-        request.default_language = "python";
+        request.option_filename  = "file.cpp";
         assert(formatAnalysisXML(request) == request.default_language);
     }*/
 
