@@ -179,7 +179,7 @@ if (a &lt; b) a = b;
     }
 
     // Rule #5
-    /*{
+    {
         analysis_request request;
         request.source_code = R"(if (a < b) a = b;)";
         request.disk_filename  = "";
@@ -188,19 +188,13 @@ if (a &lt; b) a = b;
         request.source_url       = "";
         request.option_url      = "";
         request.option_language = "C++";
-        request.default_language = "python";
+        request.default_language = "";
         request.option_loc = -1;
 
         // Test #1
-        request.source_url = "source.url";
-        request.option_url = "option.url";
-        assert(formatAnalysisXML(request) == request.option_url);
-
-        // Test #2
-        request.source_url = "source.url";
-        request.option_url = "";
-        assert(formatAnalysisXML(request) == request.source_url);
-    }*/
+        request.default_language = "python";
+        assert(formatAnalysisXML(request) == request.default_language);
+    }
 
     return 0;
 }

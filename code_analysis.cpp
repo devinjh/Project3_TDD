@@ -18,6 +18,22 @@
  */
 std::string formatAnalysisXML(const analysis_request& request) {
 
+    // Code for Rule #5
+    if (request.default_language != "")
+    {
+    	return request.default_language;
+    }
+
+    // Code for Rule #4
+    if (request.option_url != "" || request.source_url != "")
+    {
+    	if (request.option_url != "")
+    	{
+    		return request.option_url;
+    	}
+    	return request.source_url;
+    }
+
     // Code for Rules #1, 2, and 3
     if (request.disk_filename != "" || request.entry_filename != "" || request.option_filename != "")
     {
@@ -42,16 +58,6 @@ std::string formatAnalysisXML(const analysis_request& request) {
     		return request.entry_filename;
     	}
     	return request.disk_filename;
-    }
-
-    // Code for Rule #4
-    if (request.option_url != "" || request.source_url != "")
-    {
-    	if (request.option_url != "")
-    	{
-    		return request.option_url;
-    	}
-    	return request.source_url;
     }
 
     // wrap the content with a unit element
