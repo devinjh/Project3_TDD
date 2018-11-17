@@ -92,13 +92,14 @@ std::string formatAnalysisXML(const analysis_request& request) {
     wrap.attribute("language", request.option_language);
 
     // Code for Rule #8
-    /*if (request.option_loc > -1)
+    if (request.option_loc > -1)
     {
     	//std::string str = request.option_loc;
-    	wrap.attribute("loc", request.option_loc);
-    }*/
+    	//wrap.attribute("loc", request.option_loc);
+    }
 
     // Code for Rule #9
+    // If the hash attribute isn't empty, it's added
     if (request.option_hash != "")
     {
     	wrap.attribute("hash", request.option_hash);
