@@ -80,5 +80,35 @@ if (a &lt; b) a = b;
         assert(formatAnalysisXML(request) == request.option_filename);
     }
 
+    // Rule #3
+    {
+        analysis_request request;
+        request.source_code = R"(if (a < b) a = b;)";
+        request.disk_filename  = "";
+        request.entry_filename  = "";
+        request.option_filename = "";
+        request.source_url       = "";
+        request.option_url      = "";
+        request.option_language = "C++";
+        request.default_language = "";
+        request.option_loc = -1;
+
+        // Test #1
+        request.disk_filename = "disk_filename.cpp";
+        request.entry_filename = "data";
+        assert(formatAnalysisXML(request) == request.disk_filename);
+
+        // Test #2
+        request.disk_filename = "disk_filename.zip";
+        request.entry_filename = "data";
+        assert(formatAnalysisXML(request) == request.disk_filename);
+
+        // Test #3
+        request.option_filename = "option_filename.cpp";
+        request.disk_filename = "disk_filename.tar.gz";
+        request.entry_filename = "data";
+        assert(formatAnalysisXML(request) == request.option_filename);
+    }
+
     return 0;
 }

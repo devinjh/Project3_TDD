@@ -27,7 +27,14 @@ std::string formatAnalysisXML(const analysis_request& request) {
     	}
     	if (request.disk_filename.find(".zip") != -1 || request.disk_filename.find(".gz") != -1)
     	{
-    		return request.entry_filename;
+    		if (request.entry_filename == "data")
+    		{
+    			return request.disk_filename;
+    		}
+    		else
+    		{
+    			return request.entry_filename;
+    		}
     	}
     	else
     	{
