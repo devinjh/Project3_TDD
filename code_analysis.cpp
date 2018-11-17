@@ -94,8 +94,8 @@ std::string formatAnalysisXML(const analysis_request& request) {
     // Code for Rule #8
     if (request.option_loc > -1)
     {
-    	//std::string str = request.option_loc;
-    	//wrap.attribute("loc", request.option_loc);
+    	std::string str = (request.option_loc).to_string;
+    	wrap.attribute("loc", request.option_loc);
     }
 
     // Code for Rule #9
