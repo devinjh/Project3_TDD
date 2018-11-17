@@ -18,8 +18,8 @@
  */
 std::string formatAnalysisXML(const analysis_request& request) {
 
-    // Code for Rule #1
-    if (request.disk_filename != "")
+    // Code for Rules #1, 2, and 3
+    if (request.disk_filename != "" || request.entry_filename != "" || request.option_filename != "")
     {
     	if (request.option_filename != "")
     	{
@@ -27,20 +27,26 @@ std::string formatAnalysisXML(const analysis_request& request) {
     	}
     	if (request.disk_filename.find(".zip") != -1 || request.disk_filename.find(".gz") != -1)
     	{
-    		if (request.entry_filename == "data")
+    		if (request.entry_filename == "data" && request.disk_filename != "")
     		{
     			return request.disk_filename;
     		}
-    		else
+    		if (request.entry_filename == "")
     		{
-    			return request.entry_filename;
+    			return request.disk_filename;
     		}
+    		return request.entry_filename;
     	}
-    	else
+    	if (request.disk_filename == "")
     	{
-    		return request.disk_filename;
+    		return request.entry_filename;
     	}
+    	return request.disk_filename;
     }
+
+    // Code for Rule #4
+    //if (request.option)
+
     // wrap the content with a unit element
     xmlWrapper wrap("code", "http://mlcollard.net/code");
     wrap.startElement("unit");

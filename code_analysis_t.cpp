@@ -46,6 +46,16 @@ if (a &lt; b) a = b;
         request.disk_filename = "disk_filename.tar.gz";
         request.entry_filename = "entry_filename.cpp";
         assert(formatAnalysisXML(request) == request.entry_filename);
+
+        // Test #4
+        request.disk_filename = "";
+        request.entry_filename = "entry_filename.cpp";
+        assert(formatAnalysisXML(request) == request.entry_filename);
+
+        // Test #5
+        request.disk_filename = "disk_filename.zip";
+        request.entry_filename = "";
+        assert(formatAnalysisXML(request) == request.disk_filename);
     }
 
     // Rule #2
@@ -109,6 +119,25 @@ if (a &lt; b) a = b;
         request.entry_filename = "data";
         assert(formatAnalysisXML(request) == request.option_filename);
     }
+
+    // Rule #4
+    /*{
+        analysis_request request;
+        request.source_code = R"(if (a < b) a = b;)";
+        request.disk_filename  = "";
+        request.entry_filename  = "";
+        request.option_filename = "";
+        request.source_url       = "";
+        request.option_url      = "";
+        request.option_language = "C++";
+        request.default_language = "";
+        request.option_loc = -1;
+
+        // Test #1
+        request.source_url = "source.url";
+        request.option_url = "option.url"
+        assert(formatAnalysisXML(request) == request.option_url);
+    }*/
 
     return 0;
 }
