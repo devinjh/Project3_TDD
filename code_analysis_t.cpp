@@ -196,5 +196,49 @@ if (a &lt; b) a = b;
         assert(formatAnalysisXML(request) == request.default_language);
     }
 
+    // Rule #6
+    /*{
+        analysis_request request;
+        request.source_code = R"(if (a < b) a = b;)";
+        request.disk_filename  = "";
+        request.entry_filename  = "";
+        request.option_filename = "";
+        request.source_url       = "";
+        request.option_url      = "";
+        request.option_language = "C++";
+        request.default_language = "";
+        request.option_loc = -1;
+
+        // Test #1
+        request.default_language = "python";
+        assert(formatAnalysisXML(request) == request.default_language);
+    }*/
+
+    // Rule #7
+    {
+        analysis_request request;
+        request.source_code = R"(if (a < b) a = b;)";
+        request.disk_filename  = "";
+        request.entry_filename  = "";
+        request.option_filename = "";
+        request.source_url       = "";
+        request.option_url      = "";
+        request.option_language = "C++";
+        request.default_language = "";
+        request.option_loc = -1;
+
+        // Test #1
+        request.option_filename = "option_filename";
+        request.disk_filename = "-";
+        request.entry_filename = "entry_filename";
+        assert(formatAnalysisXML(request) == request.option_filename);
+
+        // Test #2
+        request.option_filename = "";
+        request.disk_filename = "-";
+        request.entry_filename = "entry_filename";
+        assert(formatAnalysisXML(request) == request.entry_filename);
+    }
+
     return 0;
 }

@@ -53,7 +53,7 @@ std::string formatAnalysisXML(const analysis_request& request) {
     	{
     		// If the entry filename is simply "data" and the disk_filename is not blank, then
     		//the disk_filename must be returned
-    		if (request.entry_filename == "data" && request.disk_filename != "")
+    		if (request.entry_filename == "data" && (request.disk_filename != "" && request.disk_filename != "-"))
     		{
     			return request.disk_filename;
     		}
@@ -68,6 +68,11 @@ std::string formatAnalysisXML(const analysis_request& request) {
     	// If the option filename is not provided, the file is not an archived file, and the
     	// disk file name is blank, then the entry file is returned
     	if (request.disk_filename == "")
+    	{
+    		return request.entry_filename;
+    	}
+    	// If the disk filename is a dash, than the entry filename is returned
+    	else if (request.disk_filename == "-")
     	{
     		return request.entry_filename;
     	}
